@@ -1,7 +1,7 @@
 % arara: pdflatex: { shell: true } if missing ('use.pstricks.true')
 % arara: pstricks if exists ('use.pstricks.true')
 \documentclass[12pt]{article}
-\usepackage{auto-pst-pdf}
+\usepackage[pspdf={-dALLOWPSTRANSPARENCY}]{auto-pst-pdf}
 \usepackage{bm}
 \usepackage{pst-plot}
 \begin{document}
