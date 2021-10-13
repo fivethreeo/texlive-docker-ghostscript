@@ -1,0 +1,23 @@
+% arara: pdflatex: { shell: true } if missing ('use.pstricks.true')
+% arara: pstricks if exists ('use.pstricks.true')
+\documentclass[12pt]{article}
+\usepackage{auto-pst-pdf}
+\usepackage{bm}
+\usepackage{pst-plot}
+\begin{document}
+
+\begin{pspicture}(-2,-5)(2,5)
+\psset{xunit=0.0222cm,yunit=1cm}
+\psaxes[Dx=45]{->}(0,0)(-90,-5)(90,5)
+\uput[-90](85,0){$\bm{\alpha}$}
+\uput[0](0,4.8){\textbf{y}}
+\psgrid[griddots=10,%
+	subgriddiv=0,%
+	gridlabels=0pt,%
+	xunit=45](-1.5,-5)(1.5,5)
+\psplot[plotstyle=curve,%
+	linewidth=1.5pt,%
+	linecolor=red]{-78}{78}{x sin x cos div}% postscript function
+\end{pspicture}
+
+\end{document}

@@ -1,0 +1,30 @@
+!config
+# pstricks rule for arara
+# author: Marco Daniel
+# requires arara 4.0+
+identifier: pstricks
+name: LATEX-DVIPS-PS2PDF
+commands:
+  - command: <arara> latex @{action} @{draft} @{shell} @{synctex} @{options} "@{file}"
+  - command: <arara> dvips "@{getBasename(file)}.dvi" -o "@{getBasename(file)}.ps" @{dvipsoptions} 
+  - command: <arara> ps2pdf @{ps2pdfoptions} "@{getBasename(file)}.ps" "@{output}.pdf"
+arguments:
+#arguments for convertion
+- identifier: output
+  flag: <arara> @{parameters.output}
+  default: <arara> @{getBasename(file)}
+- identifier: dvipsoptions
+  flag: <arara> @{parameters.options}
+- identifier: ps2pdfoptions
+  flag: <arara> @{parameters.options}
+#arguments for latex
+- identifier: action
+  flag: <arara> --interaction=@{parameters.action}
+- identifier: shell
+  flag: <arara> @{isTrue(parameters.shell,"--shell-escape","--no-shell-escape")}
+- identifier: synctex
+  flag: <arara> @{isTrue(parameters.synctex,"--synctex=1","--synctex=0")}
+- identifier: draft
+  flag: <arara> @{isTrue(parameters.draft,"--draftmode")}
+- identifier: options
+  flag: <arara> @{parameters.options}
